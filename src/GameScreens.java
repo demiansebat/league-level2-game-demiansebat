@@ -42,11 +42,11 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.RED);
-	}
+		g.setColor(Color.BLUE);
+		}
 
 	void drawEndState(Graphics g) {
-		g.setColor(Color.YELLOW);
+g.setColor(Color.ORANGE);
 	}
 
 	@Override
@@ -70,9 +70,11 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println("HIIII");
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
+		        System.out.println("REEEE");
 		    } else {
 		        currentState++;
 		    }
