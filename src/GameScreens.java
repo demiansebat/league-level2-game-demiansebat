@@ -35,18 +35,22 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.GREEN);
-		g.drawString("*interesting name*", 20, 100);
+		g.drawString("*why is the other thing refusing to draw*", 20, 100);
 		g.setFont(headingfont);
 		g.drawString("Click the Enter Key to Begin", 150, 320);
 		g.drawString("Press the up arrow for directions", 115, 480);
 	}
 
 	void drawGameState(Graphics g) {
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setColor(Color.BLUE);
-		}
+		g.drawString("I HOPE THIS DRAWS", 300, 500);
+		g.drawString("PLEASE DRAW", 100, 550);
+	}
 
 	void drawEndState(Graphics g) {
-g.setColor(Color.ORANGE);
+		g.setColor(Color.ORANGE);
 	}
 
 	@Override
@@ -70,25 +74,28 @@ g.setColor(Color.ORANGE);
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("HIIII");
-		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-		    if (currentState == END) {
-		        currentState = MENU;
-		        System.out.println("REEEE");
-		    } else {
-		        currentState++;
-		    }
-		}   
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			System.out.println("THE KEY WAS PRESSED"+currentState);
+			if (currentState == END) {
+				currentState = MENU;
+			} else {
+				currentState++;
+			}
+		}
 	}
-	 void updateMenuState(){ 
-		 
-	 }
-	 void updateGameState() {
-		 
-	 }
-	 void updateEndState()  {
-		 
-	 }
+
+	void updateMenuState() {
+
+	}
+
+	void updateGameState() {
+
+	}
+
+	void updateEndState() {
+
+	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 
@@ -104,6 +111,7 @@ g.setColor(Color.ORANGE);
 		} else if (currentState == END) {
 			updateEndState();
 		}
+		repaint();
 	}
 
 }
