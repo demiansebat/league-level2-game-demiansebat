@@ -1,4 +1,4 @@
-import java.awt.Color;
+ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -35,22 +35,19 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.GREEN);
-		g.drawString("*why is the other thing refusing to draw*", 20, 100);
+		g.drawString("*INSERT INTERESTING TITLE*", 20, 100);
 		g.setFont(headingfont);
-		g.drawString("Click the Enter Key to Begin", 150, 320);
-		g.drawString("Press the up arrow for directions", 115, 480);
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.YELLOW);
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setColor(Color.BLUE);
-		g.drawString("I HOPE THIS DRAWS", 300, 500);
-		g.drawString("PLEASE DRAW", 100, 550);
 	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.ORANGE);
+		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 	}
 
 	@Override
