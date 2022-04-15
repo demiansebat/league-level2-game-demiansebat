@@ -43,6 +43,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.YELLOW);
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setColor(Color.BLUE);
+		g.drawRect(250, 250, 75, 75);
+		g.setColor(Color.BLUE);
+    	g.fillRect(250, 250, 75, 75);
 	}
 
 	void drawEndState(Graphics g) {
