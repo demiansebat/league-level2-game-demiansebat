@@ -1,10 +1,11 @@
- import java.awt.Color;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,9 +16,12 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	Font titleFont;
 	Font headingfont;
 	Timer switchScreen;
+	Timer roadSpawn;
 	public static final int MENU = 0;
 	public static final int GAME = 1;
 	public static final int END = 2;
+	
+	ArrayList<Ground> grounds= new ArrayList<Ground>();
 	public static int currentState = MENU;
 
 	public static void main(String[] args) {
@@ -28,6 +32,8 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		headingfont = new Font("Arial", Font.ITALIC, 20);
 		switchScreen = new Timer(1000 / 60, this);
 		switchScreen.start();
+		roadSpawn = new Timer(500, this);
+		roadSpawn.start();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -45,7 +51,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.BLUE);
 		g.drawRect(250, 250, 75, 75);
 		g.setColor(Color.BLUE);
-    	g.fillRect(250, 250, 75, 75);
+		g.fillRect(250, 250, 75, 75);
 	}
 
 	void drawEndState(Graphics g) {
@@ -75,7 +81,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			System.out.println("THE KEY WAS PRESSED"+currentState);
+			System.out.println("THE KEY WAS PRESSED" + currentState);
 			if (currentState == END) {
 				currentState = MENU;
 			} else {
@@ -89,7 +95,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void updateGameState() {
-
+for (Ground ground: grounds) {
+ground.update();
+}
 	}
 
 	void updateEndState() {
@@ -103,15 +111,21 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (currentState == MENU) {
-			updateMenuState();
-		} else if (currentState == GAME) {
-			updateGameState();
-		} else if (currentState == END) {
-			updateEndState();
+		if (e.getSource()==(switchScreen)) {
+			if (currentState == MENU) {
+				updateMenuState();
+			} else if (currentState == GAME) {
+				updateGameState();
+			} else if (currentState == END) {
+				updateEndState();
+			}
+			repaint();
 		}
-		repaint();
+		else if (e.getSource()==(roadSpawn)) {
+		//spawn a bunch of random obstacles
+			Ground ground= new Ground(50,75);
+			grounds.add(ground);
+		}
 	}
 
 }
