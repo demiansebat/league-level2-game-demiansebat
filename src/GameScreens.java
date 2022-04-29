@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,12 +21,10 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	public static final int MENU = 0;
 	public static final int GAME = 1;
 	public static final int END = 2;
-	
-	ArrayList<Ground> grounds= new ArrayList<Ground>();
-	public static int currentState = MENU;
+	Random place = new Random();
 
-	public static void main(String[] args) {
-	}
+	ArrayList<Ground> grounds = new ArrayList<Ground>();
+	public static int currentState = MENU;
 
 	GameScreens() {
 		titleFont = new Font("Arial", Font.ITALIC, 48);
@@ -34,6 +33,10 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		switchScreen.start();
 		roadSpawn = new Timer(500, this);
 		roadSpawn.start();
+	}
+
+	void addGround() {
+		grounds.add(new Ground(100,100));
 	}
 
 	void drawMenuState(Graphics g) {
@@ -49,9 +52,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.YELLOW);
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setColor(Color.BLUE);
-		g.drawRect(250, 250, 75, 75);
-		g.setColor(Color.BLUE);
-		g.fillRect(250, 250, 75, 75);
+		for (Ground ground : grounds) {
+			ground.draw(g);
+		}
 	}
 
 	void drawEndState(Graphics g) {
@@ -95,9 +98,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void updateGameState() {
-for (Ground ground: grounds) {
-ground.update();
-}
+		for (Ground ground : grounds) {
+			ground.update();
+		}
 	}
 
 	void updateEndState() {
@@ -111,7 +114,7 @@ ground.update();
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==(switchScreen)) {
+		if (e.getSource() == (switchScreen)) {
 			if (currentState == MENU) {
 				updateMenuState();
 			} else if (currentState == GAME) {
@@ -120,11 +123,8 @@ ground.update();
 				updateEndState();
 			}
 			repaint();
-		}
-		else if (e.getSource()==(roadSpawn)) {
-		//spawn a bunch of random obstacles
-			Ground ground= new Ground(50,75);
-			grounds.add(ground);
+		} else if (e.getSource() == (roadSpawn)) {
+			addGround();
 		}
 	}
 

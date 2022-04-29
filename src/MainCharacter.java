@@ -4,10 +4,10 @@ import java.awt.Graphics;
 public class MainCharacter extends GameObject{
 	public MainCharacter(int x, int y, int width, int height) {
 		super(x, y, width,height);
-		speed=10;
+		speed=1;
 		}
 	void update() {
-		 y+=speed;
+		x-=speed;
 	}
 	
 }

@@ -3,8 +3,7 @@ import java.awt.Graphics;
 
 public class Ground extends GameObject{
 	public Ground(int width, int height) {
-		super(SetupGame.WIDTH, SetupGame.HEIGHT-150, width, height);
-		
+		super(SetupGame.WIDTH-200, SetupGame.HEIGHT/2, width, height);
 		
 	}
 void update() {
