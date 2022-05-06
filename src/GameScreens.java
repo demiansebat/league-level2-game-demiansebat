@@ -18,12 +18,16 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	Font headingfont;
 	Timer switchScreen;
 	Timer roadSpawn;
+	Timer obstacleSpawn;
+	int obstacleCounter=0;
+	int missingObstacles=0;
 	public static final int MENU = 0;
 	public static final int GAME = 1;
 	public static final int END = 2;
 	Random place = new Random();
 
 	ArrayList<Ground> grounds = new ArrayList<Ground>();
+	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	public static int currentState = MENU;
 
 	GameScreens() {
@@ -33,10 +37,17 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		switchScreen.start();
 		roadSpawn = new Timer(500, this);
 		roadSpawn.start();
+		obstacleSpawn = new Timer(500, this);
+		obstacleSpawn.start();
+		// Random? idk
+	}
+
+	void addObstacle() {
+		obstacles.add(new Obstacle(30, 60));
 	}
 
 	void addGround() {
-		grounds.add(new Ground(100,100));
+		grounds.add(new Ground(100, 50));
 	}
 
 	void drawMenuState(Graphics g) {
@@ -54,6 +65,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.BLUE);
 		for (Ground ground : grounds) {
 			ground.draw(g);
+		}
+		for (Obstacle obstacle : obstacles) {
+			obstacle.draw(g);
 		}
 	}
 
@@ -101,6 +115,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		for (Ground ground : grounds) {
 			ground.update();
 		}
+		for (Obstacle obstacle : obstacles) {
+			obstacle.update();
+		}
 	}
 
 	void updateEndState() {
@@ -125,6 +142,19 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 			repaint();
 		} else if (e.getSource() == (roadSpawn)) {
 			addGround();
+
+		} else if (e.getSource() == (obstacleSpawn)) {
+			int randy=place.nextInt(100);
+			if (randy<15+(missingObstacles*10) && obstacleCounter<2) {
+				missingObstacles=0;
+				addObstacle();
+				obstacleCounter++;
+			}
+			else {
+			obstacleCounter=0;
+			missingObstacles++;
+			}
+			
 		}
 	}
 
