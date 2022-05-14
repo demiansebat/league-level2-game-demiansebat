@@ -39,7 +39,6 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		roadSpawn.start();
 		obstacleSpawn = new Timer(500, this);
 		obstacleSpawn.start();
-		// Random? idk
 	}
 
 	void addObstacle() {
@@ -69,6 +68,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		for (Obstacle obstacle : obstacles) {
 			obstacle.draw(g);
 		}
+		
 	}
 
 	void drawEndState(Graphics g) {

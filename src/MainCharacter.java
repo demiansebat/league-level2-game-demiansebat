@@ -9,5 +9,8 @@ public class MainCharacter extends GameObject{
 	void update() {
 		x-=speed;
 	}
-	
+	void draw(Graphics g) {
+		g.setColor(Color.ORANGE);
+		g.fillRect(x,y,width,height);
+	}
 }
