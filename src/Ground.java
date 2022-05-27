@@ -11,6 +11,6 @@ void update() {
 }
 void draw(Graphics g) {
 	g.setColor(Color.BLUE);
-	g.fillRect(x, y, width, height);
+	g.fillRect((int)x, (int)y, width, height);
 }
 }

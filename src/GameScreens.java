@@ -28,6 +28,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 
 	ArrayList<Ground> grounds = new ArrayList<Ground>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+	MainCharacter character= new MainCharacter(355,355,45,45);
 	public static int currentState = MENU;
 
 	GameScreens() {
@@ -62,14 +63,15 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.YELLOW);
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setColor(Color.BLUE);
+		g.fillRect(0, 400, 1000, 50);
 		for (Ground ground : grounds) {
 			ground.draw(g);
 		}
 		for (Obstacle obstacle : obstacles) {
 			obstacle.draw(g);
 		}
-		
-	}
+		character.draw(g);
+			}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.ORANGE);
@@ -118,6 +120,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		for (Obstacle obstacle : obstacles) {
 			obstacle.update();
 		}
+		character.update();
 	}
 
 	void updateEndState() {

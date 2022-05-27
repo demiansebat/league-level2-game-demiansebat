@@ -1,12 +1,15 @@
 import java.awt.Rectangle;
 
 public class GameObject {
-	int x;
-	int y;
+	double x;
+	double y;
 	int width;
 	int height;
 	int speed;
 	boolean isActive;
+	double gravity;
+	double velocity;
+	
 
 	public GameObject(int x, int y, int width, int height) {
 		this.x = x;
@@ -15,5 +18,7 @@ public class GameObject {
 		this.height = height;
 		speed = 3;
 		isActive = true;
+		this.gravity=1.0/3.0;
+		this.velocity=0;
 	}
 }
