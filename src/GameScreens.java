@@ -107,6 +107,10 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 				currentState++;
 			}
 		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE){
+			/////////////MAKE THE RECTANGLE MOVE UPWARD
+	////set velocity to something idk
+		}
 	}
 
 	void updateMenuState() {

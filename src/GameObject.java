@@ -18,7 +18,7 @@ public class GameObject {
 		this.height = height;
 		speed = 3;
 		isActive = true;
-		this.gravity=1.0/3.0;
+		this.gravity=1.0/10.0;
 		this.velocity=0;
 	}
 }
