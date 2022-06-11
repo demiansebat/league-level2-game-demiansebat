@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GameScreens extends JPanel implements KeyListener, ActionListener {
+public class GameScreens extends JPanel  implements KeyListener, ActionListener {
 	Font titleFont;
 	Font headingfont;
 	Timer switchScreen;
@@ -108,8 +108,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE){
-			/////////////MAKE THE RECTANGLE MOVE UPWARD
-	////set velocity to something idk
+	character.velocity-=3;
 		}
 	}
 
