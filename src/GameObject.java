@@ -9,6 +9,7 @@ public class GameObject {
 	boolean isActive;
 	double gravity;
 	double velocity;
+	Rectangle collisionBox;
 	
 
 	public GameObject(int x, int y, int width, int height) {
@@ -20,5 +21,9 @@ public class GameObject {
 		isActive = true;
 		this.gravity=1.0/10.0;
 		this.velocity=0;
+		collisionBox= new Rectangle(x,y,width,height);
 	}
+	 void update() {
+		 collisionBox.setBounds((int) x, (int) y, width, height);
+	 }
 }

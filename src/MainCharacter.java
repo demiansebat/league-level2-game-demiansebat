@@ -10,9 +10,22 @@ public class MainCharacter extends GameObject{
 		}
 
 	void update() {
-
+super.update();
 velocity=velocity+gravity;
-y=y+velocity;
+Rectangle box= new Rectangle((int)x,(int)(y+velocity),width,height);
+boolean hasCollided=false;
+for (int k = 0; k < GameScreens.grounds.size(); k++) {
+	if (GameScreens.grounds.get(k).collisionBox.intersects(box)) {
+		velocity=0;
+		hasCollided=true;
+	}
+}
+if (hasCollided==true) {
+	
+}
+else {
+	y=y+velocity;
+}
 	}
 	void draw(Graphics g) {
 		g.setColor(Color.BLACK);

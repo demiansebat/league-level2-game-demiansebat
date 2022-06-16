@@ -9,6 +9,7 @@ public class Obstacle extends GameObject{
 	}
 	void update() {
 		x-=speed;
+		super.update();
 	}
 	void draw(Graphics g) {
 		g.setColor(Color.GREEN);

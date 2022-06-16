@@ -13,22 +13,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GameScreens extends JPanel  implements KeyListener, ActionListener {
+public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	Font titleFont;
 	Font headingfont;
 	Timer switchScreen;
 	Timer roadSpawn;
 	Timer obstacleSpawn;
-	int obstacleCounter=0;
-	int missingObstacles=0;
+	int obstacleCounter = 0;
+	int missingObstacles = 0;
 	public static final int MENU = 0;
 	public static final int GAME = 1;
 	public static final int END = 2;
 	Random place = new Random();
 
-	ArrayList<Ground> grounds = new ArrayList<Ground>();
+	static ArrayList<Ground> grounds = new ArrayList<Ground>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
-	MainCharacter character= new MainCharacter(355,355,45,45);
+	MainCharacter character = new MainCharacter(355, 355, 45, 45);
 	public static int currentState = MENU;
 
 	GameScreens() {
@@ -49,6 +49,7 @@ public class GameScreens extends JPanel  implements KeyListener, ActionListener 
 	void addGround() {
 		grounds.add(new Ground(100, 50));
 	}
+
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.CYAN);
@@ -71,7 +72,7 @@ public class GameScreens extends JPanel  implements KeyListener, ActionListener 
 			obstacle.draw(g);
 		}
 		character.draw(g);
-			}
+	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.ORANGE);
@@ -107,8 +108,8 @@ public class GameScreens extends JPanel  implements KeyListener, ActionListener 
 				currentState++;
 			}
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE){
-	character.velocity-=3;
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			character.velocity -= 6;
 		}
 	}
 
@@ -123,7 +124,8 @@ public class GameScreens extends JPanel  implements KeyListener, ActionListener 
 		for (Obstacle obstacle : obstacles) {
 			obstacle.update();
 		}
-		character.update();
+CheckCollision();
+character.update();
 	}
 
 	void updateEndState() {
@@ -150,18 +152,33 @@ public class GameScreens extends JPanel  implements KeyListener, ActionListener 
 			addGround();
 
 		} else if (e.getSource() == (obstacleSpawn)) {
-			int randy=place.nextInt(100);
-			if (randy<15+(missingObstacles*10) && obstacleCounter<2) {
-				missingObstacles=0;
+			int randy = place.nextInt(100);
+			if (randy < 15 + (missingObstacles * 10) && obstacleCounter < 2) {
+				missingObstacles = 0;
 				addObstacle();
 				obstacleCounter++;
+			} else {
+				obstacleCounter = 0;
+				missingObstacles++;
 			}
-			else {
-			obstacleCounter=0;
-			missingObstacles++;
-			}
-			
+
 		}
 	}
 
+	void CheckCollision() {
+		for (int i = 0; i < obstacles.size(); i++) {
+			if (obstacles.get(i).collisionBox.intersects(character.collisionBox)) {
+				GameScreens.currentState = GameScreens.END;
+				character.isActive = false;
+grounds.clear();
+obstacles.clear();
+character.velocity=0;
+			}
+
+		}
+		for (int k = 0; k < grounds.size(); k++) {
+			if (grounds.get(k).collisionBox.intersects(character.collisionBox)) {
+			}
+		}
+	}
 }

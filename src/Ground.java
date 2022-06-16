@@ -8,6 +8,7 @@ public class Ground extends GameObject{
 	}
 void update() {
 	x-=speed;
+	super.update();
 }
 void draw(Graphics g) {
 	g.setColor(Color.BLUE);

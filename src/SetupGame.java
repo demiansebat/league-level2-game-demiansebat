@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class SetupGame {
 	JFrame frame;
-	GameScreens panel;
+	GameScreens panel; 
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 800;
 
