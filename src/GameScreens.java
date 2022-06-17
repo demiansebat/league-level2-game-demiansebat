@@ -28,7 +28,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 
 	static ArrayList<Ground> grounds = new ArrayList<Ground>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
-	MainCharacter character = new MainCharacter(355, 355, 45, 45);
+	MainCharacter character = new MainCharacter(355, 350, 45, 45);
 	public static int currentState = MENU;
 
 	GameScreens() {
@@ -47,7 +47,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void addGround() {
-		grounds.add(new Ground(100, 50));
+		grounds.add(new Ground(SetupGame.WIDTH-10, SetupGame.HEIGHT/2,100, 50));
 	}
 
 
@@ -64,7 +64,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.YELLOW);
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
 		g.setColor(Color.BLUE);
-		g.fillRect(0, 400, 1000, 50);
+
 		for (Ground ground : grounds) {
 			ground.draw(g);
 		}
@@ -90,7 +90,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		} else if (currentState == END) {
 			drawEndState(g);
 		}
-
+		
 	}
 
 	@Override
@@ -106,10 +106,14 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 				currentState = MENU;
 			} else {
 				currentState++;
+				grounds.clear();
+				obstacles.clear();
+				character.velocity=0;
+				grounds.add(new Ground(0,400, 1100,50));
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			character.velocity -= 6;
+			character.velocity -= 9;
 		}
 	}
 
@@ -152,8 +156,8 @@ character.update();
 			addGround();
 
 		} else if (e.getSource() == (obstacleSpawn)) {
-			int randy = place.nextInt(100);
-			if (randy < 15 + (missingObstacles * 10) && obstacleCounter < 2) {
+			int randy = place.nextInt(150);
+			if (randy < 10 + (missingObstacles * 10) && obstacleCounter < 2) {
 				missingObstacles = 0;
 				addObstacle();
 				obstacleCounter++;
@@ -170,9 +174,6 @@ character.update();
 			if (obstacles.get(i).collisionBox.intersects(character.collisionBox)) {
 				GameScreens.currentState = GameScreens.END;
 				character.isActive = false;
-grounds.clear();
-obstacles.clear();
-character.velocity=0;
 			}
 
 		}

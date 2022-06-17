@@ -2,8 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Ground extends GameObject{
-	public Ground(int width, int height) {
-		super(SetupGame.WIDTH-10, SetupGame.HEIGHT/2, width, height);
+	public Ground(int x,int y,int width, int height) {
+		super(x,y, width, height);
 		
 	}
 void update() {
