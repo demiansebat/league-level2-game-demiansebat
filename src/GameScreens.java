@@ -36,9 +36,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		headingfont = new Font("Arial", Font.ITALIC, 20);
 		switchScreen = new Timer(1000 / 60, this);
 		switchScreen.start();
-		roadSpawn = new Timer(500, this);
+		roadSpawn = new Timer(250, this);
 		roadSpawn.start();
-		obstacleSpawn = new Timer(500, this);
+		obstacleSpawn = new Timer(250, this);
 		obstacleSpawn.start();
 	}
 
@@ -47,7 +47,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void addGround() {
-		grounds.add(new Ground(SetupGame.WIDTH-10, SetupGame.HEIGHT/2,100, 50));
+		grounds.add(new Ground(SetupGame.WIDTH-10, SetupGame.HEIGHT/2,500, 50));
 	}
 
 
@@ -112,8 +112,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 				grounds.add(new Ground(0,400, 1100,50));
 			}
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			character.velocity -= 9;
+		if (e.getKeyCode() == KeyEvent.VK_SPACE && character.doublejump==true) {
+			character.velocity -= 20;
+			character.doublejump=false;
 		}
 	}
 

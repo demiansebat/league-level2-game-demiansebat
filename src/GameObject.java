@@ -17,9 +17,9 @@ public class GameObject {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		speed = 3;
+		speed = 6;
 		isActive = true;
-		this.gravity=2.4/10.0;
+		this.gravity=10/10.0;
 		this.velocity=0;
 		collisionBox= new Rectangle(x,y,width,height);
 	}

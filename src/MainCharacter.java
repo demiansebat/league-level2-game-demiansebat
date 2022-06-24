@@ -4,10 +4,14 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 public class MainCharacter extends GameObject{
+public boolean doublejump=false;
+
+
 	public MainCharacter(int x, int y, int width, int height) {
 		super(x, y, width,height);
 		speed=1;
-		}
+		
+	}
 
 	void update() {
 super.update();
@@ -18,6 +22,7 @@ for (int k = 0; k < GameScreens.grounds.size(); k++) {
 	if (GameScreens.grounds.get(k).collisionBox.intersects(box)) {
 		velocity=0;
 		hasCollided=true;
+		doublejump=true;
 	}
 }
 if (hasCollided==true) {
@@ -32,5 +37,4 @@ else {
 		g.fillRect((int)x,(int)y,width,height);
 			
 		}
-		
 	}
