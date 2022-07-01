@@ -19,6 +19,8 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	Timer switchScreen;
 	Timer roadSpawn;
 	Timer obstacleSpawn;
+	Timer points;
+	int score;
 	int obstacleCounter = 0;
 	int missingObstacles = 0;
 	public static final int MENU = 0;
@@ -40,6 +42,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		roadSpawn.start();
 		obstacleSpawn = new Timer(250, this);
 		obstacleSpawn.start();
+		points= new Timer(1000/60,this);
 	}
 
 	void addObstacle() {
@@ -109,6 +112,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 				grounds.clear();
 				obstacles.clear();
 				character.velocity=0;
+				score=0;
 				grounds.add(new Ground(0,400, 1100,50));
 			}
 		}
@@ -157,7 +161,7 @@ character.update();
 			addGround();
 
 		} else if (e.getSource() == (obstacleSpawn)) {
-			int randy = place.nextInt(150);
+			int randy = place.nextInt(200);
 			if (randy < 10 + (missingObstacles * 10) && obstacleCounter < 2) {
 				missingObstacles = 0;
 				addObstacle();
