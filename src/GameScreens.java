@@ -30,7 +30,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 
 	static ArrayList<Ground> grounds = new ArrayList<Ground>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
-	MainCharacter character = new MainCharacter(355, 350, 45, 20);
+	MainCharacter character = new MainCharacter(355, 350, 55, 19);
 	public static int currentState = MENU;
 
 	GameScreens() {
