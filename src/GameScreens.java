@@ -33,15 +33,6 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
-	//GameObject object= new GameObject();
-	
-	public GameScreens(int x, int y, int width, int height) {
-	//	super(x, y, width, height);
-		if (needImage) {
-			loadImage("thing.jpeg");
-		}
-	}
-
 	static ArrayList<Ground> grounds = new ArrayList<Ground>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	MainCharacter character = new MainCharacter(355, 350, 55, 19);
@@ -59,6 +50,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		obstacleSpawn = new Timer(250, this);
 		obstacleSpawn.start();
 		points= new Timer(1000/60,this);
+		if (needImage) {
+		    loadImage ("thing.jpeg");
+		}
 	}
 
 	void loadImage(String imageFile) {
@@ -92,15 +86,12 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void drawGameState(Graphics g) {
-		if (gotImage) {
-		//g.drawImage(image,(int) x,(int) y, width, height, null);
-		}
-		else {
-		g.setColor(Color.YELLOW);
-		//g.fillRect((int) x, (int) y, width, height);
-		}
-		g.setColor(Color.BLUE);
-
+		  if (gotImage) {
+	        	g.drawImage(image, 0, 0, SetupGame.WIDTH, SetupGame.HEIGHT, null);
+	        } else {
+	        	g.setColor(Color.YELLOW);
+	        	g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
+	        }
 		for (Ground ground : grounds) {
 			ground.draw(g);
 		}
