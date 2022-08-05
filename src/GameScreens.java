@@ -35,7 +35,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	public static boolean gotImage = false;
 	static ArrayList<Ground> grounds = new ArrayList<Ground>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
-	MainCharacter character = new MainCharacter(355, 350, 55, 19);
+	MainCharacter character = new MainCharacter(355, 450, 55, 19);
 	public static int currentState = MENU;
 	
 	
@@ -51,7 +51,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		obstacleSpawn.start();
 		points= new Timer(1000/60,this);
 		if (needImage) {
-		    loadImage ("thing.jpeg");
+		    loadImage ("2937034.jpg");
 		}
 	}
 
@@ -72,7 +72,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void addGround() {
-		grounds.add(new Ground(SetupGame.WIDTH-10, SetupGame.HEIGHT/2,500, 50));
+		grounds.add(new Ground(SetupGame.WIDTH-10, SetupGame.HEIGHT/2+175,850, 50));
 	}
 
 
@@ -137,7 +137,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 				obstacles.clear();
 				character.velocity=0;
 				score=0;
-				grounds.add(new Ground(0,400, 1100,50));
+				grounds.add(new Ground(0,475,850,50));
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && character.doublejump==true) {

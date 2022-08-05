@@ -11,7 +11,7 @@ public class Obstacle extends GameObject{
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 	public Obstacle(int width, int height) {
-		super(SetupGame.WIDTH-10, SetupGame.HEIGHT/2-40, width, height);
+		super(SetupGame.WIDTH-10, SetupGame.HEIGHT/2+140, width, height);
 		if (needImage) {
 			loadImage("coneObstacle.png");
 		}
