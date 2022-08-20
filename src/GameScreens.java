@@ -40,6 +40,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	public static int currentState = MENU;
 	
 	
+	
 		
 	GameScreens() {
 		titleFont = new Font("Arial", Font.ITALIC, 48);
@@ -84,18 +85,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.GREEN);
 		g.drawString("*INSERT INTERESTING TITLE*", 20, 100);
 		g.setFont(headingfont);
-		  if (gotImage) {
-	        	g.drawImage(image, 0, 0, SetupGame.WIDTH, SetupGame.HEIGHT, null);
-	        } else {
 	        	g.setColor(Color.YELLOW);
 	        	g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
-	        }
-		//draw background for menu, end states, add relevant text.
-	//create  a rectangle, if clicked (mousePressed) within box parameters, run code with assigned images to randomize car
-	//	String[] cars= {"car2", "car3", "car4"};
-	//  Random randy=new Random();        
-    //	int randomNumber=randy.nextInt(cars.length);
-	//  System.out.println(cars[randomNumber]);
+	        	g.setColor(Color.GREEN);
 	}
 
 	void drawGameState(Graphics g) {
@@ -156,6 +148,10 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && character.doublejump==true) {
 			character.velocity -= 20;
 			character.doublejump=false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_R) {
+			int random =1+(new Random().nextInt(4));
+			character.loadImage("car"+random+".png");
 		}
 	}
 

@@ -29,7 +29,7 @@ public static boolean gotImage = false;
 	        } catch (Exception e) {
 	            
 	        }
-	        needImage = false;
+	      //  needImage = false;
 	    }
 	}
 	void update() {
