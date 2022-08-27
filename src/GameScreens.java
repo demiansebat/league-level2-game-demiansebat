@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -36,7 +37,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	public static boolean gotImage = false;
 	static ArrayList<Ground> grounds = new ArrayList<Ground>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
-	MainCharacter character = new MainCharacter(355, 450, 55, 19);
+	MainCharacter character = new MainCharacter(355, 450, 59, 21);
 	public static int currentState = MENU;
 	
 	
@@ -53,21 +54,22 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		obstacleSpawn.start();
 		points= new Timer(1000/60,this);
 		if (needImage) {
-		    loadImage ("2937034.jpg");
+			try {
+				image = ImageIO.read(this.getClass().getResourceAsStream("startroad.jpeg"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	void loadImage(String imageFile) {
-		if (needImage) {
 			try {
 				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
 				gotImage = true;
 			} catch (Exception e) {
 
 			}
-			needImage = false;
 		}
-	}
 	
 	void addObstacle() {
 		obstacles.add(new Obstacle(30, 60));
@@ -79,24 +81,16 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 
 
 	void drawMenuState(Graphics g) {
-		g.setColor(Color.CYAN);
-		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
+		g.drawImage(image, 0, 0, SetupGame.WIDTH, SetupGame.HEIGHT, null);
 		g.setFont(titleFont);
 		g.setColor(Color.GREEN);
 		g.drawString("*INSERT INTERESTING TITLE*", 20, 100);
 		g.setFont(headingfont);
-	        	g.setColor(Color.YELLOW);
-	        	g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
-	        	g.setColor(Color.GREEN);
 	}
 
 	void drawGameState(Graphics g) {
-		  if (gotImage) {
 	        	g.drawImage(image, 0, 0, SetupGame.WIDTH, SetupGame.HEIGHT, null);
-	        } else {
-	        	g.setColor(Color.YELLOW);
-	        	g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
-	        }
+	        
 		for (Ground ground : grounds) {
 			ground.draw(g);
 		}
@@ -136,8 +130,10 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 			System.out.println("THE KEY WAS PRESSED" + currentState);
 			if (currentState == END) {
 				currentState = MENU;
+				loadImage("startroad.jpeg");
 			} else {
 				currentState++;
+				loadImage("2937034.jpg");
 				grounds.clear();
 				obstacles.clear();
 				character.velocity=0;
