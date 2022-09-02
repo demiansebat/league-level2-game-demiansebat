@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -52,7 +53,8 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		roadSpawn.start();
 		obstacleSpawn = new Timer(250, this);
 		obstacleSpawn.start();
-		points= new Timer(1000/60,this);
+		points= new Timer(100,this);
+
 		if (needImage) {
 			try {
 				image = ImageIO.read(this.getClass().getResourceAsStream("startroad.jpeg"));
@@ -103,6 +105,7 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	void drawEndState(Graphics g) {
 		g.setColor(Color.ORANGE);
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
+		SetupGame.label.setText("");
 	}
 
 	@Override
@@ -131,6 +134,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 			if (currentState == END) {
 				currentState = MENU;
 				loadImage("startroad.jpeg");
+				
+				
+				
 			} else {
 				currentState++;
 				loadImage("2937034.jpg");
@@ -138,7 +144,9 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 				obstacles.clear();
 				character.velocity=0;
 				score=0;
+				points.restart();
 				grounds.add(new Ground(0,475,850,50));
+				
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && character.doublejump==true) {
@@ -201,12 +209,22 @@ character.update();
 			}
 
 		}
+		if(e.getSource() == (points)) {
+			score++;
+			if(currentState==GAME) {
+SetupGame.label.setText("Score: "+score);
+			}
+			}
 	}
-
+	
+	
+	
 	void CheckCollision() {
 		for (int i = 0; i < obstacles.size(); i++) {
 			if (obstacles.get(i).collisionBox.intersects(character.collisionBox)) {
 				GameScreens.currentState = GameScreens.END;
+				SetupGame.label.setText("");
+	
 				character.isActive = false;
 			}
 

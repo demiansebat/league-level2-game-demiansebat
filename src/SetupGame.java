@@ -5,11 +5,13 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SetupGame {
 	JFrame frame;
 	GameScreens panel; 
+	public static JLabel label= new JLabel();
 	public static final int WIDTH = 750;
 	public static final int HEIGHT = 600;
 
@@ -22,6 +24,8 @@ public class SetupGame {
 		frame = new JFrame();
 		panel = new GameScreens();
 		frame.addKeyListener(panel);
+		panel.add(label);
+
 	}
 
 	void setup() {
