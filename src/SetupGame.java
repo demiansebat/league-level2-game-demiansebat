@@ -25,7 +25,7 @@ public class SetupGame {
 		panel = new GameScreens();
 		frame.addKeyListener(panel);
 		panel.add(label);
-
+frame.setTitle("League Level 2 Game");
 	}
 
 	void setup() {
