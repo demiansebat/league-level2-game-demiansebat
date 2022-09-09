@@ -86,8 +86,13 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 		g.drawImage(image, 0, 0, SetupGame.WIDTH, SetupGame.HEIGHT, null);
 		g.setFont(titleFont);
 		g.setColor(Color.GREEN);
-		g.drawString("*INSERT INTERESTING TITLE*", 20, 100);
+		g.drawString("LEAGUE LEVEL 2 GAME!", 75, 75);
+		g.drawString("INSTRUCTIONS", 200, 315);
 		g.setFont(headingfont);
+		g.drawString("Press SPACE to jump", 275, 380);
+		g.drawString("Press R to randomize your car", 235, 405);
+		g.drawString("Press ENTER to begin/continue", 235, 430);
+
 	}
 
 	void drawGameState(Graphics g) {
@@ -103,8 +108,15 @@ public class GameScreens extends JPanel implements KeyListener, ActionListener {
 	}
 
 	void drawEndState(Graphics g) {
-		g.setColor(Color.ORANGE);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, SetupGame.WIDTH, SetupGame.HEIGHT);
+		g.setColor(Color.RED);
+		g.setFont(titleFont);
+		points.stop();
+		g.drawString("YOU DIED!", 230, 100);
+		g.drawString("Score: "+score, 250, 200);
+		g.setFont(headingfont);
+		g.drawString("Press ENTER to restart", 250, 400);
 		SetupGame.label.setText("");
 	}
 
